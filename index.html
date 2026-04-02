@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methodology — Digital Media Attention Share Tracker | Data Beings</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #5A5A5A;
+    --accent: #1B4D3E;
+    --accent-light: #E8F0EC;
+    --border: #E5E5E0;
+    --section-num: #C4D4CC;
+    --footer-bg: #111111;
+    --footer-text: #A0A0A0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo img {
+    height: 36px;
+    display: block;
+  }
+  .header-tag {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 72px 32px 48px;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero-subtitle {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 640px;
+    line-height: 1.75;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .divider hr {
+    border: none;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Sections ── */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 32px 80px;
+  }
+
+  .section {
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--section-num);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 44px;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+  }
+
+  .section-body {
+    padding-left: 60px;
+    color: var(--text-secondary);
+    font-size: 15.5px;
+  }
+
+  .section-body p { margin-bottom: 12px; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  .tag {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .formula-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .example-box {
+    background: #F5F5F0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .example-box strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+  }
+  .bullet-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 6px;
+  }
+  .bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--section-num);
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 48px 32px 36px;
+  }
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .footer-logo img {
+    height: 32px;
+    filter: brightness(10);
+    opacity: 0.85;
+  }
+  .social-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .social-links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--footer-text);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .social-links a:hover { color: #fff; }
+  .social-links svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+  .copyright {
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 16px 20px; }
+    .hero { padding: 48px 20px 32px; }
+    .content { padding: 16px 20px 60px; }
+    .section-body { padding-left: 0; }
+    .section-header { flex-direction: column; gap: 4px; }
+    .section-num { font-size: 24px; }
+    .divider { padding: 0 20px; }
+    .header-tag { display: none; }
+    footer { padding: 36px 20px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <a href="https://thedatabeings.com/" class="logo">
+      <img src="https://thedatabeings.com/wp-content/uploads/2021/11/dataBeings-Logo-331x63.jpg" alt="Data Beings Logo">
+    </a>
+    <span class="header-tag">Methodology Document</span>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-eyebrow">Assembly Election Tracker</div>
+  <h1>Digital Media Attention Share Tracker — Methodology</h1>
+  <p class="hero-subtitle">A transparent overview of how we measure the share of public attention on digital platforms received by political leaders and parties during election periods.</p>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- Content -->
+<div class="content">
+
+  <!-- 1. Objective -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Objective</h2>
+    </div>
+    <div class="section-body">
+      <p>The tracker measures the share of public attention on digital platforms — YouTube, Instagram, and Facebook — received by political leaders and parties during the election period.</p>
+      <p>The primary metric reported is <strong>Attention Share (%)</strong> — the proportion of total measurable engagement attributable to a leader or party over a defined time window (e.g., last 24 hours or last 7 days).</p>
+    </div>
+  </div>
+
+  <!-- 2. Data Sources -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Data Sources</h2>
+    </div>
+    <div class="section-body">
+      <p>The analysis uses publicly accessible data from:</p>
+      <div class="tag-list">
+        <span class="tag">YouTube</span>
+        <span class="tag">Instagram</span>
+        <span class="tag">Facebook</span>
+      </div>
+      <p>The following engagement signals are considered: Views, Likes, Comments, and Shares. Additional metadata includes content title and description, channel / page name, and publishing timestamps.</p>
+      <p>No private, user-level, or platform-internal data is used.</p>
+    </div>
+  </div>
+
+  <!-- 3. Digital Media Selection -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Digital Media Selection</h2>
+    </div>
+    <div class="section-body">
+      <p>The dataset includes content from a curated universe of official political party and leader channels/pages, news publishers and media organizations, political commentary channels/pages, and relevant public content creators.</p>
+      <p>Only regionally relevant language ecosystems are considered.</p>
+      <div class="example-box">
+        <strong>Example:</strong> For West Bengal elections, the tracker focuses primarily on Bengali-language content ecosystems across platforms.
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Entity Identification -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Entity Identification (Leaders &amp; Parties)</h2>
+    </div>
+    <div class="section-body">
+      <p>Each content unit (video/post/reel) is analyzed to identify mentions of political leaders and political parties. A content item may be associated with one or multiple entities.</p>
+      <p>Entity detection is performed using title and text parsing, Named Entity Recognition (NER) models, and confidence scoring mechanisms. Only entities above a predefined confidence threshold are included in the analysis.</p>
+    </div>
+  </div>
+
+  <!-- 5. Time Window -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Time Window</h2>
+    </div>
+    <div class="section-body">
+      <p>Attention Share is computed over rolling windows:</p>
+      <div class="tag-list">
+        <span class="tag">Last 24 hours</span>
+        <span class="tag">Last 7 days</span>
+      </div>
+      <p>Since engagement metrics (views, likes, shares, etc.) are cumulative, incremental engagement within the selected window is calculated using snapshot differences.</p>
+    </div>
+  </div>
+
+  <!-- 6. Engagement Calculation -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Engagement Calculation</h2>
+    </div>
+    <div class="section-body">
+      <p>For each content item, engagement within a time window is calculated as the difference between the latest and previous engagement counts:</p>
+      <div class="formula-box">
+        Engagement (time window) = Latest engagement count − Previous engagement count
+      </div>
+      <div class="example-box">
+        <strong>Example:</strong> Views today: 1,000,000 → Views yesterday: 800,000 → Views gained in last 24 hours = 200,000
+      </div>
+      <p>This method is applied consistently across all engagement signals.</p>
+    </div>
+  </div>
+
+  <!-- 7. Aggregation -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Aggregation (Leader / Party Level)</h2>
+    </div>
+    <div class="section-body">
+      <p>For each leader or party, total engagement is the sum of all engagement across content mentioning the entity. Engagement is aggregated across all platforms and all content formats (videos, posts, reels).</p>
+    </div>
+  </div>
+
+  <!-- 8. Attention Share Calculation -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Attention Share (%) Calculation</h2>
+    </div>
+    <div class="section-body">
+      <p>Attention Share is calculated as:</p>
+      <div class="formula-box">
+        Attention Share (%) = (Entity Engagement ÷ Total Engagement across all entities) × 100
+      </div>
+      <p>This represents the relative share of digital attention captured by each entity.</p>
+    </div>
+  </div>
+
+  <!-- 9. Multi-Entity Content -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>Handling Multi-Entity Content</h2>
+    </div>
+    <div class="section-body">
+      <p>If a content item mentions multiple leaders or parties, the full engagement value is attributed to each identified entity. This approach reflects that a single piece of content contributes to the visibility of all entities discussed within it.</p>
+    </div>
+  </div>
+
+  <!-- 10. Interpretation -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>Interpretation Guidelines</h2>
+    </div>
+    <div class="section-body">
+      <ul class="bullet-list">
+        <li>Higher Attention Share (%) indicates greater visibility and audience attention</li>
+        <li>The metric reflects media presence, not sentiment or public support</li>
+        <li>It does not imply endorsement, favorability, or electoral outcomes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 11. Limitations -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>Limitations</h2>
+    </div>
+    <div class="section-body">
+      <p>The Attention Share metric does not account for sentiment (positive vs negative coverage), audience demographics, watch time or content retention, and platform algorithmic biases.</p>
+      <p>Results are influenced by the selection of channels/pages, accuracy of entity detection models, and platform-specific engagement dynamics.</p>
+    </div>
+  </div>
+
+  <!-- 12. Update Frequency -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2>Update Frequency</h2>
+    </div>
+    <div class="section-body">
+      <p>Data is updated daily. Metrics reflect the latest available engagement deltas within the defined time windows.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/data-beings-76765021b/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://x.com/DataBeings" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        @DataBeings
+      </a>
+    </div>
+    <div class="copyright">
+      © 2026 thedatabeings.com by Xponentium India LLP. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
